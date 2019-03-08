@@ -1,0 +1,24 @@
+{
+   "name": "redport",
+   "version": "0.1.0",
+   "description": "Ultralight tool for exporting/importing a redis database.",
+   "dependencies": {
+      "redis": "2.8.0"
+   },
+   "main": "redport.js",
+   "author": "Federico Pereiro <fpereiro@gmail.com>",
+   "contributors": ["Federico Pereiro <fpereiro@gmail.com>"],
+   "license": [{
+      "type": "Public Domain",
+      "url": "http://github.com/fpereiro/redport#license"
+   }],
+   "keywords": ["redis", "import", "export", "command line"],
+   "repository" : {
+      "type": "git",
+      "url": "http://github.com/fpereiro/redport.git"
+   },
+   "bugs": {
+      "url": "http://github.com/fpereiro/redport/issues",
+      "email": "fpereiro@gmail.com"
+   }
+}
