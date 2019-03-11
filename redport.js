@@ -1,5 +1,5 @@
 /*
-redport - v0.1.1
+redport - v0.1.2
 
 Written by Federico Pereiro (fpereiro@gmail.com) and released into the public domain.
 
@@ -108,7 +108,7 @@ else if (! isNaN (parseInt (to))) {
             line = JSON.parse (line);
             var t = Date.now ();
             if (line.t !== undefined && line.t < t) return pending--;
-            redis.restore (line.n, line.t === undefined ? 0 : Math.ceil ((line.t - t) / 1000), Buffer.from (line.d, 'base64'), function (error) {
+            redis.restore (line.n, line.t === undefined ? 0 : line.t - t, Buffer.from (line.d, 'base64'), function (error) {
                if (error) return clog ('Redis error', error);
                pending--;
             });

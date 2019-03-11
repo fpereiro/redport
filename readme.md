@@ -4,7 +4,7 @@ Ultralight tool for exporting/importing a redis database.
 
 ## Current status of the project
 
-The current version of redport, v0.1.1, is considered to be *highly experimental*. Please use it with extreme caution. This status will hopefully change as I use the tool repeatedly and with growing confidence.
+The current version of redport, v0.1.2, is considered to be *highly experimental*. Please use it with extreme caution. This status will hopefully change as I use the tool repeatedly and with growing confidence.
 
 ## Installation
 
