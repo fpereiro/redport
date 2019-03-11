@@ -1,5 +1,5 @@
 /*
-redport - v0.1.0
+redport - v0.1.1
 
 Written by Federico Pereiro (fpereiro@gmail.com) and released into the public domain.
 
@@ -45,6 +45,10 @@ if (! isNaN (parseInt (from))) {
             var t = Date.now ();
             multi.exec (function (error, ttls) {
                if (error) return clog ('Redis error', error);
+               if (keys.length === 0 && cursor === '0') {
+                  clog ('Exported ' + Object.keys (seenkeys).length + ' keys (' + size + ' bytes) in ' + Math.round ((Date.now () - T) / 1000) + ' seconds');
+                  return process.exit (0);
+               }
                var output = '', counter = keys.length;
                for (var j = 0; j < keys.length; j++) {
                   (function () {
@@ -55,7 +59,7 @@ if (! isNaN (parseInt (from))) {
                            counter = false;
                            return clog ('Redis error', error);
                         }
-                        output += JSON.stringify ({t: ttls [k] > -1 ? (t + 1000 * (ttls [k])) : undefined, n: keys [k], d: dump.toString ('base64')}) + '\n';
+                        output += JSON.stringify ({n: keys [k], t: ttls [k] > -1 ? (t + 1000 * (ttls [k])) : undefined, d: dump.toString ('base64')}) + '\n';
                         if (--counter > 0) return;
                         require ('fs').writeFile (to, output, {flag: firstloop ? 'w' : 'a'}, function (error) {
                            if (error) return clog ('FS error', error);
@@ -98,7 +102,7 @@ else if (! isNaN (parseInt (to))) {
             clog ('FS error', error);
             process.exit (1);
          });
-         var firstloop = true, T = Date.now (), count = 0, pending = 0;
+         var T = Date.now (), count = 0, pending = 0;
          rl.on ('line', function (line) {
             pending++, count++;
             line = JSON.parse (line);
